@@ -1,0 +1,18 @@
+<p:dialog  widgetVar="codeGendlg"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:h="http://xmlns.jcp.org/jsf/html"
+           xmlns:p="http://primefaces.org/ui"
+           xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:inputText placeholder="Enter id" value="#{groupManagedBean.codegenerator.codegeneratorid}" />
+    <br/>
+    <p:inputText placeholder="Enter name" value="#{groupManagedBean.codegenerator.name}" />
+    <br/>
+    <p:inputText placeholder="Enter Max Length" value="#{groupManagedBean.codegenerator.maxlenght}" />
+    <br/>
+    <p:inputText placeholder="Enter Start Value" value="#{groupManagedBean.codegenerator.startfrom}" />
+    <br/>
+    <p:commandButton value="add" actionListener="#{groupManagedBean.addCode()}" oncomplete="PF('childdlg').hide()" ajax="false" process="childDlgForm" />
+       
+    
+</p:dialog>  

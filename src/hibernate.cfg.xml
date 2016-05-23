@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:oracle:thin:@//172.16.1.230:1521/XE</property>
+        <property name="connection.driver_class">oracle.jdbc.OracleDriver</property>
+        <mapping class="com.Entites.EmployeesOne2One.Employee"/>
+        <mapping class="com.Entites.EmployeesOne2One.EmployeeUser"/>
+        <mapping class="com.Entites.Tree.Child"/>
+        <mapping class="com.Entites.Tree.Codegenerator"/>
+        <mapping class="com.Entites.Tree.Grouptable"/>
+        <mapping class="com.Entites.Tree.Sequence"/>
+        <mapping class="com.Entites.Tree.Treenodesequence"/>
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

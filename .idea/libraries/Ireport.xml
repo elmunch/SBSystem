@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Ireport">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/lib/Ireport" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/Ireport" recursive="false" />
+  </library>
+</component>

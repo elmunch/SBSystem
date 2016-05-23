@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/template.xhtml">
+    <ui:define name="metadata">
+        asasas
+    </ui:define>
+    <ui:define name="content">
+            <p:dataTable id="Emp" var="emp" value="#{mappingMB.empes}" editMode="cell" editable="true"
+                         style="margin-bottom:20px">
+                <p:ajax event="cellEdit" listener="#{mappingMB.instance.cellEdit.onCellEdit}" update=":mainForm:msgs"/>
+                <f:facet name="header">
+                    Employees
+                </f:facet>
+                <p:column headerText="Name">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{emp.name}"/></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{emp.name}"
+                                                           style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Addrres">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{emp.employeeUser.addrees}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{emp.employeeUser.addrees}" style="width:100%"
+                                                           label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Delete">
+                    <!--<p:growl id="message" showDetail="true" />-->
+                    <p:commandButton value="Delete Emp" process="@this :mainForm:Emp" action="#{mappingMB.delete(emp)}"
+                                     update=":mainForm:Emp">
+                        <p:confirm header="Confirmation" message="Are you sure?"/>
+                    </p:commandButton>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"
+                                         icon="ui-icon-check"/>
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"
+                                         icon="ui-icon-close"/>
+                    </p:confirmDialog>
+                </p:column>
+            </p:dataTable>
+        
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,17 @@
+<p:dialog  widgetVar="groupdlg"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:h="http://xmlns.jcp.org/jsf/html"
+           xmlns:p="http://primefaces.org/ui"
+           xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:inputText placeholder="Enter group name" value="#{groupManagedBean.group.name}" />
+    <br/>
+    <p:outputLabel for="console" rendered="#{groupManagedBean.treenodesequence eq null}" value="Select Code : " />
+    <p:selectOneMenu id="console" required="true" rendered="#{groupManagedBean.treenodesequence eq null}" value="#{groupManagedBean.selectedCodeGenerator}" style="width:125px" converter="#{groupManagedBean.codeGeneratorConverter}">
+          <f:selectItem itemLabel="Select One" itemValue="" />
+        <f:selectItems  value="#{groupManagedBean.all}" var="code" itemLabel="#{code.name}" itemValue="#{code}"/>
+    </p:selectOneMenu>
+    <br/>
+    <p:commandButton value="add" actionListener="#{groupManagedBean.addGroup()}" oncomplete="PF('groupdlg').hide()" process="dlgForm" update=":form" />
+    <br/>
+    </p:dialog>

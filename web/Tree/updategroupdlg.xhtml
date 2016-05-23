@@ -1,0 +1,12 @@
+<p:dialog  widgetVar="updategroupdlg"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:h="http://xmlns.jcp.org/jsf/html"
+           xmlns:p="http://primefaces.org/ui"
+           xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:inputText placeholder="Enter group name" value="#{groupManagedBean.selectedGroup.name}" />
+    <br/>
+    <p:commandButton value="Update" actionListener="#{groupManagedBean.updateGroup()}" oncomplete="PF('groupdlg').hide()" ajax="false" process="dlgForm" />
+       
+    
+</p:dialog>  

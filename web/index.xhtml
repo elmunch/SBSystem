@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://primefaces.org/ui ">
+<h:body>
+
+    <h:form id="formr">
+        <p:growl id="msgs" showDetail="true"/>
+        <p:panelGrid columns="2" layout="grid" style="border:0 none;background:none">
+            <p:outputLabel value="Name "/>
+            <p:inputText value="#{mappingMB.instance.object.name}" required="true" requiredMessage="Name is Required"/>
+
+            <p:outputLabel value="Addrres "/>
+            <p:inputText value="#{mappingMB.instance.object.employeeUser.addrees}" required="true"
+                         requiredMessage="Name is Required"/>
+
+            <p:commandButton title="Reset" value="Reset" icon="fa fa-pencil-square-o" update=":formr"
+                             action="#{mappingMB.reset()}" process="@this">
+                <p:resetInput target=":formr"/>
+            </p:commandButton>
+            <p:commandButton value="Print" action="#{mappingMB.instance.iReport.printReport}"/>
+
+            <p:commandButton value="add Emp" action="#{mappingMB.createEmp()}" update=":formr"/>
+            <p:commandButton value="Search"/>
+        </p:panelGrid>
+
+        <p:dataTable id="Emp" var="emp" value="#{mappingMB.empes}" editMode="cell" editable="true"
+                     style="margin-bottom:20px">
+            <p:ajax event="cellEdit" listener="#{mappingMB.instance.cellEdit.onCellEdit}" update=":formr:msgs"/>
+            <f:facet name="header">
+                Employees
+            </f:facet>
+            <p:column headerText="Name">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{emp.name}"/></f:facet>
+                    <f:facet name="input"><p:inputText id="modelInput" value="#{emp.name}"
+                                                       style="width:100%"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column headerText="Addrres">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{emp.employeeUser.addrees}"/></f:facet>
+                    <f:facet name="input"><p:inputText value="#{emp.employeeUser.addrees}" style="width:100%"
+                                                       label="Year"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column headerText="Delete">
+                <!--<p:growl id="message" showDetail="true" />-->
+                <p:commandButton value="Delete Emp" process="@this :formr:Emp" action="#{mappingMB.delete(emp)}"
+                                 update=":formr:Emp">
+                    <p:confirm header="Confirmation" message="Are you sure?"/>
+                </p:commandButton>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+                </p:confirmDialog>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>
