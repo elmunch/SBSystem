@@ -6,11 +6,49 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
 
-                xmlns:f="http://java.sun.com/jsf/core"  template="./../MasterDesign/templates/template.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core" template="./../MasterDesign/templates/template.xhtml"
         >
     <ui:define name="bodyContent">
 
-dfgdfgdfgfdgg
+        <h:form id="form">
+            <!--notification-->
+            <p:growl id="messages" showDetail="true"/>
+            <p:tree id="nodes" selection="#{groupManagedBean.selectedNode}" value="#{groupManagedBean.rootNode}"
+                    var="node" selectionMode="single">
+                <p:ajax event="select" update=":form:messages" listener="#{groupManagedBean.onNodeSelect}"/>
+                <p:treeNode type="main">
+                    <h:outputText value="#{node}"/>
+                </p:treeNode>
+                <p:treeNode type="group">
+                    <h:outputText value="#{node}"/>
+                </p:treeNode>
+                <p:treeNode type="item">
+                    <h:outputText value="#{node}"/>
+                </p:treeNode>
+            </p:tree>
+            <p:contextMenu for="nodes" nodeType="main">
+                <p:menuitem value="Add Group" actionListener="#{groupManagedBean.addTreeNodeSequenceParent()}"
+                            oncomplete="PF('groupdlg').show()" update=":dlgForm"/>
+
+            </p:contextMenu>
+            <p:contextMenu for="nodes" nodeType="group">
+                <p:menuitem value="Add Child Group" actionListener="#{groupManagedBean.addTreeNodeSequenceParent()}"
+                            oncomplete="PF('groupdlg').show()" update=":dlgForm"/>
+                <p:menuitem value="Add Item" actionListener="#{groupManagedBean.setParentToItem()}"
+                            oncomplete="PF('childdlg').show()" update=":childDlgForm"/>
+                <p:menuitem value="Update Group" actionListener="#{groupManagedBean.setselectedgroup()}"
+                            oncomplete="PF('updateGroupDlgForm').show()" update=":updateGroupDlgForm"/>
+                <p:menuitem value="delete Group" actionListener="#{groupManagedBean.deleteGroup2()}"
+                            update=":form:nodes"/>
+                <p:menuitem value="Add Code Generator" oncomplete="PF('codeGendlg').show()"
+                            update=":addCodeGenetarorDlg"/>
+            </p:contextMenu>
+
+            <p:contextMenu for="nodes" nodeType="item">
+                <p:menuitem value="delete item" actionListener="#{groupManagedBean.deleteItem()}" update=":form:nodes"/>
+
+            </p:contextMenu>
+        </h:form>
 
     </ui:define>
 </ui:composition>
